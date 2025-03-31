@@ -1,0 +1,24 @@
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 100vh;
+  width: 30vw; /* Adjust width */
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.chat-nav {
+  height: 100vh;
+  width: 70vw;
+}
