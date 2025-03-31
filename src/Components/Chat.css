@@ -1,9 +1,122 @@
-.parent-chat
-{
-    height: 100vh;
-    width: 100%;
+.parent-chat {
+  height: 100vh;
+  width: 100%;
   overflow: hidden;
-    background-color: aquamarine;
-
+  display: flex;
+  flex-direction: column;
 }
 
+.profile-top {
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+}
+
+.first {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.profile-pic {
+  height: 60%;
+  width: 8%;
+  overflow: hidden;
+}
+.profile-photo {
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+
+.profile-details {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.profile-details > p {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.status {
+  font-size: x-small;
+  color: rgba(0, 0, 0, 0.489);
+}
+
+.second {
+  height: 100%;
+  width: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: large;
+}
+
+.chat-ui {
+  height: 85vh;
+  width: 100%;
+  /* background-color: aquamarine; */
+}
+.chat-area {
+  height: 100%;
+  width: 100%;
+  /* background-color: aquamarine; */
+}
+
+.type-message {
+  height: 7vh;
+  width: 100%;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.send-files {
+  height: 100%;
+  width: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-area-chat {
+  height: 100%;
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #970000; */
+}
+
+.text-area-field {
+  height: 70%;
+  width: 100%;
+  /* border-radius: 50%; */
+  outline: none;
+  /* border: 1px solid black; */
+  border-radius: 10px 10px;
+  border-style: none;
+  background-color: rgba(0, 0, 0, 0.066);
+}
+.send-btn-div {
+  height: 100%;
+  width: 18%;
+  overflow: hidden;
+}
+.send-btn {
+  height: 100%;
+  width: 100%;
+  border: none;
+  color: green;
+  background-color: white;
+}
