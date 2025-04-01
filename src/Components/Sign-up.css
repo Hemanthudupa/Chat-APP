@@ -1,0 +1,159 @@
+.signup-parent {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.signup-image {
+  height: 100%;
+  width: 50%;
+  background: url("../images/Untitled design.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.signup-image-content {
+  height: 50%;
+  width: 50%;
+  /* border: 2px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: larger;
+  text-align: center;
+  color: blueviolet;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.signup-content {
+  height: 100%;
+  width: 50%;
+  /* background-color: aquamarine; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signup-content-parent {
+  height: 70%;
+  width: 90%;
+  /* border: 2px solid black; */
+}
+.signup-header {
+  height: 10%;
+  width: 100%;
+  font-size: 1rem;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.signup-header h1 {
+  margin: 0px;
+  padding: 0px;
+  width: max-content;
+  border-bottom: 3px solid; /* Set border width */
+  border-image: linear-gradient(
+      to right,
+      blueviolet,
+      blue,
+      green,
+      yellow,
+      orange
+    )
+    1;
+}
+
+.first-form {
+  height: 10%;
+  width: 100%;
+  /* background-color: blueviolet; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.first-form > div {
+  height: 70%;
+  width: 48%;
+  /* background-color: beige; */
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.279);
+}
+.first-form > div > input {
+  height: 90%;
+  width: 100%;
+  overflow: hidden;
+  border: none;
+}
+
+.second-form {
+  height: 40%;
+  width: 100%;
+  /* background-color: black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.second-form > div {
+  height: 18%;
+  width: 100%;
+  /* background-color: beige; */
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.279);
+}
+.second-form > div > input {
+  height: 90%;
+  width: 100%;
+  overflow: hidden;
+  border: none;
+}
+
+.signup-footer {
+  height: 35%;
+  width: 100%;
+  /* border: 1px solid rgba(0, 0, 0, 0.279); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.signup-footer > div {
+  height: 30%;
+  width: 100%;
+  border-radius: 10px;
+overflow: hidden;
+font-size: smaller;
+}
+.signup-footer-1 {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.signup-button {
+  height: 90%;
+  width: 100%;
+  color: white;
+  font-weight: bolder;
+  font-size: large;
+  background-color: blue;
+  border-radius: 10px;
+  border: none;
+}
+
+.signup-footer-3
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+}
