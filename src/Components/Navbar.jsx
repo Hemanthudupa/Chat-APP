@@ -9,7 +9,7 @@ import { CiLogout } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
 import Contact from "./Contact";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="navbar">
@@ -56,9 +56,9 @@ const Navbar = () => {
             </div>
           </div>
           <div className="contact">
-        <Link to="/chat/123">
-        <Contact/>
-        </Link>
+            <Link to="/chat/123" className="link-tag-contact">
+              <Contact />
+            </Link>
           </div>
         </div>
       </div>

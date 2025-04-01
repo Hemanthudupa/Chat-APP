@@ -4,7 +4,22 @@ import { CgProfile } from "react-icons/cg";
 import { IoVideocamOutline } from "react-icons/io5";
 import { CiCircleInfo } from "react-icons/ci";
 import { RiAttachment2 } from "react-icons/ri";
+import { useState } from "react";
+import { debounce } from "lodash";
+
 const Chat = () => {
+  const [text, setText] = useState("");
+  const [uiText, setUiText] = useState([]);
+  function updateDataOnUI(uiText, text) {
+    // let arr = [uiText];
+    // arr.push(text);
+    // setUiText(arr);
+    setUiText((prev) => [...prev, text]);
+    setText("");
+  }
+  const updateText = debounce((value) => {
+    setText(value);
+  }, 0);
   const { id } = useParams();
   console.log(id);
   return (
@@ -26,7 +41,13 @@ const Chat = () => {
       </div>
 
       <div className="chat-ui">
-        <div className="chat-area"></div>
+        <div className="chat-area">
+          {uiText.map((ele, index) => (
+            <div className="chat-text">
+              <p key={index}>{ele}</p>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="type-message">
         <div className="send-files">
@@ -39,10 +60,23 @@ const Chat = () => {
             rows="100"
             placeholder="Type your message here "
             className="text-area-field"
+            value={text}
+            onChange={(e) => {
+              updateText(e.target.value);
+            }}
           ></textarea>
         </div>
         <div className="send-btn-div">
-          <button className="send-btn">Send message</button>
+          <button
+            className="send-btn"
+            onClick={() => {
+              {
+                updateDataOnUI(uiText, text);
+              }
+            }}
+          >
+            Send message
+          </button>
         </div>
       </div>
     </div>
