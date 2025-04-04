@@ -2,7 +2,6 @@ import {
   RouterProvider,
   Outlet,
   createBrowserRouter,
-  useNavigate,
 } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Contact from "./Components/Contact";
@@ -11,12 +10,12 @@ import "./App.css";
 import { AuthProvider, useAuth } from "./utils/AuthContext";
 import SignUp from "./Components/Sign-up";
 import { useEffect } from "react";
+import Login from "./Components/Login";
 const Layout = () => {
   const { token } = useAuth();
-  const navi = useNavigate();
   useEffect(() => {
     if (!token) {
-      navi("/sign-up");
+      // navi("/login");
     }
   }, []);
   return (
@@ -44,6 +43,10 @@ const route = createBrowserRouter([
   {
     path: "/sign-up",
     element: <SignUp />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

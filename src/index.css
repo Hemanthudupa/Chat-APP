@@ -2,5 +2,24 @@ body {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
+}
 
+.credential-link {
+  display: inline-block; /* Makes it behave like a button */
+  text-decoration: none; /* Removes underline */
+  color: blue; /* Custom color */
+}
+
+.credential-link:visited {
+  color: inherit; /* Prevents color change after clicking */
+}
+
+.credential-link:active,
+a:focus {
+  outline: none; /* Removes focus outline */
+}
+
+.credential-link:hover {
+  color: inherit; /* Prevents color change */
+  transform: scale(1.1); /* Slightly enlarges on hover */
 }
