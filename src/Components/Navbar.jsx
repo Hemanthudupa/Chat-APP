@@ -10,7 +10,31 @@ import { CgProfile } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
 import Contact from "./Contact";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../utils/Constants";
+import { useEffect, useState } from "react";
+import { useAuth } from "../utils/AuthContext";
 const Navbar = () => {
+  const [contacts, setContacts] = useState([]);
+  const { token } = useAuth();
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}contacts/contact`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setContacts(data);
+      } catch (error) {
+        console.error("Error fetching contacts:", error);
+      }
+    };
+    fetchContacts();
+  }, []);
   return (
     <div className="navbar">
       <div className="nav-1">
@@ -57,7 +81,10 @@ const Navbar = () => {
           </div>
           <div className="contact">
             <Link to="/chat/123" className="link-tag-contact">
-              <Contact />
+              {contacts.map((contact) => (
+                <Contact key={contact.id} data={contact} />
+              ))}
+              {/* <Contact /> */}
             </Link>
           </div>
         </div>
