@@ -3,7 +3,6 @@ import { useCallback, useState } from "react";
 import "./Sign-up.css";
 import { Link, useNavigate } from "react-router-dom";
 import { debounce } from "lodash";
-import { BASE_URL } from "../utils/constants";
 const SignUp = () => {
   let [userDetails, setUserDetails] = useState({});
   const nav = useNavigate();

@@ -1,7 +1,9 @@
 import { CgProfile } from "react-icons/cg";
 import "./Contact.css";
 
+
 const Contact = ({ data: contact }) => {
+ 
   return (
     <div className="parent">
       <div className="profile">

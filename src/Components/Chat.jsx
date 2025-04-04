@@ -1,13 +1,30 @@
 import "./Chat.css";
-import { useParams } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { IoVideocamOutline } from "react-icons/io5";
 import { CiCircleInfo } from "react-icons/ci";
 import { RiAttachment2 } from "react-icons/ri";
-import { useState } from "react";
 import { debounce } from "lodash";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "../utils/Constants";
 
 const Chat = () => {
+  const token = localStorage.getItem("token");
+  const { id } = useParams();
+  const [userDetail, setUserDetail] = useState("");
+  useEffect(() => {
+    async function fetchSingleContact(id) {
+      const res = await fetch(`${BASE_URL}contacts/contact/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const response = await res.json();
+
+      setUserDetail(response);
+    }
+    fetchSingleContact(id);
+  }, [userDetail]);
   const [text, setText] = useState("");
   const [uiText, setUiText] = useState([]);
   function updateDataOnUI(uiText, text) {
@@ -20,8 +37,6 @@ const Chat = () => {
   const updateText = debounce((value) => {
     setText(value);
   }, 0);
-  const { id } = useParams();
-  console.log(id);
   return (
     <div className="parent-chat">
       <div className="profile-top">
@@ -30,7 +45,7 @@ const Chat = () => {
             <CgProfile className="profile-photo" />
           </div>
           <div className="profile-details">
-            <p className="name">Hemanth</p>
+            <p className="name">{userDetail?.contactName || "loading"}</p>
             <p className="status">Online</p>
           </div>
         </div>

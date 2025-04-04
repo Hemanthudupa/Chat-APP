@@ -83,12 +83,12 @@ const Navbar = () => {
             </div>
           </div>
           <div className="contact">
-            <Link to="/chat/123" className="link-tag-contact">
-              {contacts.map((contact) => (
+            {contacts.map((contact) => (
+              <Link to={`/chat/${contact.id}`} className="link-tag-contact"  key={contact.id}>
                 <Contact key={contact.id} data={contact} />
-              ))}
-              {/* <Contact /> */}
-            </Link>
+              </Link>
+            ))}
+            {/* <Contact /> */}
           </div>
         </div>
       </div>
