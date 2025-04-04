@@ -1,8 +1,4 @@
-import {
-  RouterProvider,
-  Outlet,
-  createBrowserRouter,
-} from "react-router-dom";
+import { RouterProvider, Outlet, createBrowserRouter } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Contact from "./Components/Contact";
 import Chat from "./Components/Chat";
@@ -11,6 +7,7 @@ import { AuthProvider, useAuth } from "./utils/AuthContext";
 import SignUp from "./Components/Sign-up";
 import { useEffect } from "react";
 import Login from "./Components/Login";
+import Validation from "./utils/Validation";
 const Layout = () => {
   const { token } = useAuth();
   useEffect(() => {
@@ -32,11 +29,15 @@ const Layout = () => {
 const route = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <Validation>
+        <Layout />
+      </Validation>
+    ),
     children: [
       {
         path: "/chat/:id",
-        element: <Chat />, // Now Chat is independent
+        element: <Chat />,
       },
     ],
   },
