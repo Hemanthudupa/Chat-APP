@@ -9,12 +9,7 @@ import { useEffect } from "react";
 import Login from "./Components/Login";
 import Validation from "./utils/Validation";
 const Layout = () => {
-  const { token } = useAuth();
-  useEffect(() => {
-    if (!token) {
-      // navi("/login");
-    }
-  }, []);
+ 
   return (
     <div className="app">
       <div className="navbar">

@@ -5,7 +5,6 @@ import { debounce } from "lodash";
 import { useAuth } from "../utils/AuthContext";
 const Login = () => {
   const { login } = useAuth();
-
   let [userDetails, setUserDetails] = useState({});
   const nav = useNavigate();
   const updateDetails = useCallback(

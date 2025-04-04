@@ -15,7 +15,10 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 const Navbar = () => {
   const [contacts, setContacts] = useState([]);
-  const { token } = useAuth();
+  let { token } = useAuth();
+  if (!token) {
+    token = localStorage.getItem("token");
+  }
   useEffect(() => {
     const fetchContacts = async () => {
       try {
