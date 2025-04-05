@@ -5,10 +5,8 @@ import { useEffect } from "react";
 const Validation = ({ children }) => {
   const nav = useNavigate();
   const { token } = useAuth();
-  console.log(localStorage.getItem("token"), " is the token in local storage");
   useEffect(() => {
-    if (!token && !localStorage.getItem("token")) {
-      console.log(" nvigating to login page");
+    if (!token && !sessionStorage.getItem("token")) {
       nav("/login");
     }
   }, [token, nav]);

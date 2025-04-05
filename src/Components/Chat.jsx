@@ -7,10 +7,14 @@ import { debounce } from "lodash";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/Constants";
+import { useSocket } from "../utils/socket";
 
 const Chat = () => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
+  const socket = useSocket();
+
   const { id } = useParams();
+
   const [userDetail, setUserDetail] = useState("");
   useEffect(() => {
     async function fetchSingleContact(id) {
@@ -24,7 +28,7 @@ const Chat = () => {
       setUserDetail(response);
     }
     fetchSingleContact(id);
-  }, [userDetail]);
+  }, [id]);
   const [text, setText] = useState("");
   const [uiText, setUiText] = useState([]);
   function updateDataOnUI(uiText, text) {
@@ -55,15 +59,18 @@ const Chat = () => {
         </div>
       </div>
 
+      {/*  From now onwards we will be writting the code for showing up the messages  */}
       <div className="chat-ui">
         <div className="chat-area">
           {uiText.map((ele, index) => (
-            <div className="chat-text">
+            <div className="chat-text" key={index}>
               <p key={index}>{ele}</p>
             </div>
           ))}
         </div>
       </div>
+
+      {/*  from now onwards we will be writing the code to chat text area  */}
       <div className="type-message">
         <div className="send-files">
           <RiAttachment2 />
@@ -86,6 +93,9 @@ const Chat = () => {
             className="send-btn"
             onClick={() => {
               {
+                let to = id;
+                socket.emit("register", { userId: to });
+                socket.emit("private-message", { to, message: text });
                 updateDataOnUI(uiText, text);
               }
             }}

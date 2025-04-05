@@ -69,6 +69,7 @@ const Login = () => {
                     body: JSON.stringify(userDetails),
                   });
                   const data = await res.json();
+                  console.log(data);
                   if (res.status == 200) {
                     login(data.token);
                     nav("/");

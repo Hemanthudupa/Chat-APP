@@ -17,7 +17,7 @@ const Navbar = () => {
   const [contacts, setContacts] = useState([]);
   let { token } = useAuth();
   if (!token) {
-    token = localStorage.getItem("token");
+    token = sessionStorage.getItem("token");
   }
   useEffect(() => {
     const fetchContacts = async () => {

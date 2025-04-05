@@ -8,8 +8,12 @@ import SignUp from "./Components/Sign-up";
 import { useEffect } from "react";
 import Login from "./Components/Login";
 import Validation from "./utils/Validation";
+
+import { SocketProvider } from "./utils/socket";
+
+
+
 const Layout = () => {
- 
   return (
     <div className="app">
       <div className="navbar">
@@ -49,7 +53,9 @@ const route = createBrowserRouter([
 const App = () => {
   return (
     <AuthProvider>
-      <RouterProvider router={route} />
+      <SocketProvider>
+        <RouterProvider router={route} />
+      </SocketProvider>
     </AuthProvider>
   );
 };
