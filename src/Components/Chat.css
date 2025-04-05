@@ -146,48 +146,47 @@
   background-color: white;
 }
 
+
 .chat-text {
-  padding: 0px 20px 5px 20px;
-  /* display: flex;
-  justify-content: start;
-  align-items: start; */
+  padding: 0 20px 5px 20px;
   line-height: 1.5;
   text-align: left;
-  /* border: 1px solid black; */
   border-radius: 10px;
-  /* position: relative; */
-}
-.chat-text p {
-  margin: 0px 20px 10px 0px;
-  padding: 0px;
-  /* position: relative; */
 }
 
-.chat-right {
-  text-align: right;
-  display: flex;
-  align-items: end;
-  justify-content: end;
+/* Base bubble style for both left and right */
+.chat-bubble {
+  display: inline-block;
+  padding: 8px 20px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.066);
+  word-break: break-word;         /* Wraps long words */
+  white-space: pre-wrap;          /* Preserves spaces and wraps text */
+  max-width: 80%;                 /* Prevents bubble from going too wide */
+  width: fit-content;             /* Fits content width */
+  height: auto;                   /* Grows with content */
+  box-sizing: border-box;
 }
 
+/* Chat left (incoming) */
 .chat-left {
-  text-align: left;
+  display: flex;
+  justify-content: flex-start;
 }
 
-.chat-left p {
-  height: max-content;
-  width: max-content;
-  padding: 8px 30px ;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.066);
-
+.chat-left .chat-bubble {
+  border-radius: 15px 15px 15px 0;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
-.chat-right p {
-  height: max-content;
-  width: max-content;
-  padding: 8px 30px ;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.066);
+/* Chat right (user) */
+.chat-right {
+  display: flex;
+  justify-content: flex-end;
+}
 
+.chat-right .chat-bubble {
+  border-radius: 15px 15px 0 15px;
+  background-color: rgba(0, 150, 255, 0.1);
 }
