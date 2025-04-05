@@ -85,12 +85,12 @@
   /* background-color: aquamarine; */
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  align-items: end;
+  /* justify-content: end;
+  align-items: end; */
   gap: 10px;
   font-size: large;
   font-weight: 300;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 /* background-color: aquamarine; */
@@ -148,7 +148,6 @@
 
 .chat-text {
   padding: 0px 20px 5px 20px;
-  background-color: rgba(0, 0, 0, 0.087);
   /* display: flex;
   justify-content: start;
   align-items: start; */
@@ -156,8 +155,39 @@
   text-align: left;
   /* border: 1px solid black; */
   border-radius: 10px;
+  /* position: relative; */
 }
 .chat-text p {
   margin: 0px 20px 10px 0px;
   padding: 0px;
+  /* position: relative; */
+}
+
+.chat-right {
+  text-align: right;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+
+.chat-left {
+  text-align: left;
+}
+
+.chat-left p {
+  height: max-content;
+  width: max-content;
+  padding: 8px 30px ;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.066);
+
+}
+
+.chat-right p {
+  height: max-content;
+  width: max-content;
+  padding: 8px 30px ;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.066);
+
 }

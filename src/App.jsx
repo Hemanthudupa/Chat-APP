@@ -8,10 +8,9 @@ import SignUp from "./Components/Sign-up";
 import { useEffect } from "react";
 import Login from "./Components/Login";
 import Validation from "./utils/Validation";
+import { AuthProviderUserDetails } from "./utils/UserDetails";
 
 import { SocketProvider } from "./utils/socket";
-
-
 
 const Layout = () => {
   return (
@@ -53,9 +52,11 @@ const route = createBrowserRouter([
 const App = () => {
   return (
     <AuthProvider>
-      <SocketProvider>
-        <RouterProvider router={route} />
-      </SocketProvider>
+      <AuthProviderUserDetails>
+        <SocketProvider>
+          <RouterProvider router={route} />
+        </SocketProvider>
+      </AuthProviderUserDetails>
     </AuthProvider>
   );
 };
