@@ -96,11 +96,11 @@ const Chat = () => {
             <div className="chat-text" key={index}>
               {ele.senderId == id ? (
                 <div className="chat-right">
-                  <p class="chat-bubble">{ele.message}</p>
+                  <p className="chat-bubble">{ele.message}</p>
                 </div>
               ) : (
                 <div className="chat-left">
-                  <p class="chat-bubble">{ele.message}</p>
+                  <p className="chat-bubble">{ele.message}</p>
                 </div>
               )}
             </div>

@@ -12,6 +12,8 @@ import { AuthProviderUserDetails } from "./utils/UserDetails";
 
 import { SocketProvider } from "./utils/socket";
 
+
+
 const Layout = () => {
   return (
     <div className="app">
@@ -53,9 +55,9 @@ const App = () => {
   return (
     <AuthProvider>
       <AuthProviderUserDetails>
-        <SocketProvider>
-          <RouterProvider router={route} />
-        </SocketProvider>
+      <SocketProvider>
+        <RouterProvider router={route} />
+      </SocketProvider>
       </AuthProviderUserDetails>
     </AuthProvider>
   );
