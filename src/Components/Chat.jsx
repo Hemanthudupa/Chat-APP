@@ -38,6 +38,7 @@ const Chat = () => {
     const generatedRoomId = [userDetail.userId, userDetail.contactUserId]
       .sort()
       .join("_");
+    console.log("📦 Generated roomId:", generatedRoomId);
     return generatedRoomId;
   }, [user?.id, userDetail]);
 
@@ -49,12 +50,15 @@ const Chat = () => {
       console.log("🚪 Joining room from FE:", roomId);
       socket.emit("register", { userId: user.id });
       socket.emit("create-room", {
-        senderId: userDetail.userId,
+        senderUserId: userDetail.userId,
         contactId: userDetail.contactUserId,
       });
     };
 
-    if (socket.connected) joinRoom();
+    if (socket.connected) {
+      joinRoom();
+    }
+
     socket.on("connect", joinRoom);
 
     return () => {
@@ -64,8 +68,19 @@ const Chat = () => {
 
   // Clear chat UI on ID change
   useEffect(() => {
-    setUiText([]);
-  }, [id]);
+    async function getMessages() {
+      let res = await fetch(
+        `${BASE_URL}message/messages?from=${user.id}&to=${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      res = await res.json();
+      setUiText((prev) => [prev, ...res]);
+    }
+    getMessages();
+  }, [user, id, userDetail]);
 
   // Handle receiving messages
   useEffect(() => {
@@ -85,18 +100,43 @@ const Chat = () => {
 
   // Send message
   const handleSendMessage = () => {
-    if (!text.trim() || !userDetail) return;
+    if (!text.trim()) return;
 
     const sendMessage = {
       roomId,
-      senderId: userDetail.userId,
+      senderUserId: userDetail.userId,
       contactId: userDetail.contactUserId,
       message: text,
     };
 
     socket.emit("send-message", sendMessage);
-    setText(""); // Don't update uiText here – let socket handle it
+
+    setUiText((prev) => [
+      ...prev,
+      {
+        message: text,
+        senderUserId: userDetail.userId,
+        contactId: userDetail.contactUserId,
+      },
+    ]);
+
+    setText("");
   };
+
+  // Debug socket connection
+  useEffect(() => {
+    if (!socket) return;
+
+    console.log("🔌 Socket connected:", socket.connected);
+
+    socket.on("connect", () => {
+      console.log("✅ Socket reconnected");
+    });
+
+    return () => {
+      socket.off("connect");
+    };
+  }, [socket]);
 
   return (
     <div className="parent-chat">
@@ -119,13 +159,12 @@ const Chat = () => {
       <div className="chat-ui">
         <div className="chat-area">
           {uiText.map((ele, index) => {
-            if (ele.roomId !== roomId) return null;
-
-            const isCurrentUser = ele.senderId === user?.id;
+            const currentRoom = ele.roomId;
+            if (currentRoom !== roomId) return null;
 
             return (
               <div className="chat-text" key={index}>
-                {isCurrentUser ? (
+                {ele.senderUserId === user.id ? (
                   <div className="chat-right">
                     <p className="chat-bubble">{ele.message}</p>
                   </div>
