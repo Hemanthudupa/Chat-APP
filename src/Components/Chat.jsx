@@ -35,8 +35,9 @@ const Chat = () => {
   // Create roomId
   const roomId = useMemo(() => {
     if (!user?.id || !userDetail?.contactUserId) return null;
-    const generatedRoomId = [userDetail.userId, userDetail.contactUserId].sort().join("_");
-    console.log("📦 Generated roomId:", generatedRoomId);
+    const generatedRoomId = [userDetail.userId, userDetail.contactUserId]
+      .sort()
+      .join("_");
     return generatedRoomId;
   }, [user?.id, userDetail]);
 
@@ -53,10 +54,7 @@ const Chat = () => {
       });
     };
 
-    if (socket.connected) {
-      joinRoom();
-    }
-
+    if (socket.connected) joinRoom();
     socket.on("connect", joinRoom);
 
     return () => {
@@ -87,7 +85,7 @@ const Chat = () => {
 
   // Send message
   const handleSendMessage = () => {
-    if (!text.trim()) return;
+    if (!text.trim() || !userDetail) return;
 
     const sendMessage = {
       roomId,
@@ -97,33 +95,8 @@ const Chat = () => {
     };
 
     socket.emit("send-message", sendMessage);
-
-    setUiText((prev) => [
-      ...prev,
-      {
-        message: text,
-        senderId: userDetail.userId,
-        contactId: userDetail.contactUserId,
-      },
-    ]);
-
-    setText("");
+    setText(""); // Don't update uiText here – let socket handle it
   };
-
-  // Debug socket connection
-  useEffect(() => {
-    if (!socket) return;
-
-    console.log("🔌 Socket connected:", socket.connected);
-
-    socket.on("connect", () => {
-      console.log("✅ Socket reconnected");
-    });
-
-    return () => {
-      socket.off("connect");
-    };
-  }, [socket]);
 
   return (
     <div className="parent-chat">
@@ -146,12 +119,13 @@ const Chat = () => {
       <div className="chat-ui">
         <div className="chat-area">
           {uiText.map((ele, index) => {
-            const currentRoom = ele.roomId;
-            if (currentRoom !== roomId) return null;
+            if (ele.roomId !== roomId) return null;
+
+            const isCurrentUser = ele.senderId === user?.id;
 
             return (
               <div className="chat-text" key={index}>
-                {ele.senderId === user.id ? (
+                {isCurrentUser ? (
                   <div className="chat-right">
                     <p className="chat-bubble">{ele.message}</p>
                   </div>
