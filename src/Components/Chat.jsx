@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoVideocamOutline } from "react-icons/io5";
 import { CiCircleInfo } from "react-icons/ci";
 import { RiAttachment2 } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/Constants";
 import { useSocket } from "../utils/socket";
@@ -27,50 +27,103 @@ const Chat = () => {
       });
       const response = await res.json();
       setUserDetail(response);
+      console.log("🔍 setting up contact response", response);
     }
     if (id) fetchSingleContact(id);
   }, [id]);
 
-  // Register the user on socket connect
-  useEffect(() => {
-    if (socket && user) {
-      socket.emit("register", { userId: user.id });
-    }
-  }, [socket, user]);
+  // Create roomId
+  const roomId = useMemo(() => {
+    if (!user?.id || !userDetail?.contactUserId) return null;
+    const generatedRoomId = [userDetail.userId, userDetail.contactUserId].sort().join("_");
+    console.log("📦 Generated roomId:", generatedRoomId);
+    return generatedRoomId;
+  }, [user?.id, userDetail]);
 
-  // Listen to response event
+  // Register and join room
+  useEffect(() => {
+    if (!socket || !user?.id || !id || !roomId) return;
+
+    const joinRoom = () => {
+      console.log("🚪 Joining room from FE:", roomId);
+      socket.emit("register", { userId: user.id });
+      socket.emit("create-room", {
+        senderId: userDetail.userId,
+        contactId: userDetail.contactUserId,
+      });
+    };
+
+    if (socket.connected) {
+      joinRoom();
+    }
+
+    socket.on("connect", joinRoom);
+
+    return () => {
+      socket.off("connect", joinRoom);
+    };
+  }, [socket, user?.id, id, roomId, userDetail]);
+
+  // Clear chat UI on ID change
+  useEffect(() => {
+    setUiText([]);
+  }, [id]);
+
+  // Handle receiving messages
   useEffect(() => {
     if (!socket) return;
 
     const handleResponse = (data) => {
-      console.log("Received message:", data);
+      console.log("📥 Received message:", data);
       setUiText((prev) => [...prev, data]);
     };
 
-    socket.on("response", handleResponse);
+    socket.on("recive-message", handleResponse);
 
     return () => {
-      socket.off("response", handleResponse); // cleanup
+      socket.off("recive-message", handleResponse);
     };
   }, [socket]);
 
+  // Send message
   const handleSendMessage = () => {
     if (!text.trim()) return;
+
+    const sendMessage = {
+      roomId,
+      senderId: userDetail.userId,
+      contactId: userDetail.contactUserId,
+      message: text,
+    };
+
+    socket.emit("send-message", sendMessage);
+
     setUiText((prev) => [
       ...prev,
       {
         message: text,
-        senderId: id,
+        senderId: userDetail.userId,
+        contactId: userDetail.contactUserId,
       },
     ]);
 
-    socket.emit("private-message", {
-      to: id,
-      message: text,
-    });
-
     setText("");
   };
+
+  // Debug socket connection
+  useEffect(() => {
+    if (!socket) return;
+
+    console.log("🔌 Socket connected:", socket.connected);
+
+    socket.on("connect", () => {
+      console.log("✅ Socket reconnected");
+    });
+
+    return () => {
+      socket.off("connect");
+    };
+  }, [socket]);
 
   return (
     <div className="parent-chat">
@@ -92,19 +145,24 @@ const Chat = () => {
 
       <div className="chat-ui">
         <div className="chat-area">
-          {uiText.map((ele, index) => (
-            <div className="chat-text" key={index}>
-              {ele.senderId == id ? (
-                <div className="chat-right">
-                  <p className="chat-bubble">{ele.message}</p>
-                </div>
-              ) : (
-                <div className="chat-left">
-                  <p className="chat-bubble">{ele.message}</p>
-                </div>
-              )}
-            </div>
-          ))}
+          {uiText.map((ele, index) => {
+            const currentRoom = ele.roomId;
+            if (currentRoom !== roomId) return null;
+
+            return (
+              <div className="chat-text" key={index}>
+                {ele.senderId === user.id ? (
+                  <div className="chat-right">
+                    <p className="chat-bubble">{ele.message}</p>
+                  </div>
+                ) : (
+                  <div className="chat-left">
+                    <p className="chat-bubble">{ele.message}</p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
