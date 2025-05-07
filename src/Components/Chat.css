@@ -95,6 +95,7 @@
   flex-direction: column;
   /* justify-content: end;
   align-items: end; */
+  overflow: scroll;
   gap: 10px;
   font-size: large;
   font-weight: 300;

@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoVideocamOutline } from "react-icons/io5";
 import { CiCircleInfo } from "react-icons/ci";
 import { RiAttachment2 } from "react-icons/ri";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/Constants";
 import { useSocket } from "../utils/socket";
@@ -18,6 +18,22 @@ const Chat = () => {
   const [userDetail, setUserDetail] = useState(null);
   const [text, setText] = useState("");
   const [uiText, setUiText] = useState([]);
+
+  const chatAreaRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (chatAreaRef.current) {
+      chatAreaRef.current.scrollTo({
+        top: chatAreaRef.current.scrollHeight,
+        behavior: "smooth", // remove "behavior" if you want instant scroll
+      });
+    }
+  };
+
+  // Scroll chat on new message
+  useEffect(() => {
+    scrollToBottom();
+  }, [uiText]);
 
   // Fetch contact details
   useEffect(() => {
@@ -157,10 +173,10 @@ const Chat = () => {
       </div>
 
       <div className="chat-ui">
-        <div className="chat-area">
+        <div className="chat-area" ref={chatAreaRef}>
           {uiText.map((ele, index) => {
             const currentRoom = ele.roomId;
-            if (currentRoom !== roomId) return null;
+            if (currentRoom && currentRoom !== roomId) return null;
 
             return (
               <div className="chat-text" key={index}>
