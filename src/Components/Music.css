@@ -1,0 +1,113 @@
+.music {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(44, 44, 44);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.media {
+  height: 40%;
+  width: 100%;
+}
+
+.media-options {
+  height: 50%;
+  width: 100%;
+  /* background-color: azure; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+.search {
+  height: max-content;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  /* background-color: blueviolet; */
+}
+
+.search-img {
+  height: 100%;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+}
+.search-text {
+  height: 100%;
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-text input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  background-color: rgb(44, 44, 44);
+  color: white;
+}
+.library {
+  height: max-content;
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background-color: grey;
+  border-radius: 10px 10px;
+  color: yellowgreen;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+.library-img {
+  height: 100%;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.library-text {
+  height: 100%;
+  width: 85%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.welcome {
+  height: max-content;
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  color: yellowgreen;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.welcome-img {
+  height: 100%;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
+  align-items: center;
+}
+.welcome-text {
+  height: 100%;
+  width: 85%;
+  display: flex;
+  justify-content: start;
+  color: grey;
+  align-items: center;
+  font-size: medium;
+}

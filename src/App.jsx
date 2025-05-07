@@ -11,8 +11,7 @@ import Validation from "./utils/Validation";
 import { AuthProviderUserDetails } from "./utils/UserDetails";
 
 import { SocketProvider } from "./utils/socket";
-
-
+import Music from "./Components/Music";
 
 const Layout = () => {
   return (
@@ -39,6 +38,10 @@ const route = createBrowserRouter([
         path: "/chat/:id",
         element: <Chat />,
       },
+      {
+        path: "/music",
+        element: <Music />,
+      },
     ],
   },
   {
@@ -55,9 +58,9 @@ const App = () => {
   return (
     <AuthProvider>
       <AuthProviderUserDetails>
-      <SocketProvider>
-        <RouterProvider router={route} />
-      </SocketProvider>
+        <SocketProvider>
+          <RouterProvider router={route} />
+        </SocketProvider>
       </AuthProviderUserDetails>
     </AuthProvider>
   );
