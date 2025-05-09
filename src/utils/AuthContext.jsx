@@ -3,7 +3,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const login = (token) => {
-    sessionStorage.setItem("token", token);
+    localStorage.setItem("token", token);
     setToken(token);
   };
   const logout = () => setToken(undefined);
