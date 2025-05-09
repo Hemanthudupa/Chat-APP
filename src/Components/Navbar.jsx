@@ -21,7 +21,7 @@ const Navbar = () => {
   const [contacts, setContacts] = useState([]);
   let { token } = useAuth();
   if (!token) {
-    token = sessionStorage.getItem("token");
+    token = localStorage.getItem("token");
   }
   const chat = useMatch("/chat/:id");
   const allRoute = useMatch("/");
@@ -115,17 +115,7 @@ const Navbar = () => {
         <div className="music">
           <div className="media">
             <div className="media-name">
-              <h1
-                style={{
-                  fontSize: "2rem",
-                  color: " #1db954",
-
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-evenly",
-                  width: "70%",
-                }}
-              >
+              <h1 className="media-name-text">
                 <SiYoutubemusic /> Music Player
               </h1>
             </div>

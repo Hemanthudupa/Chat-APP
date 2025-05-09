@@ -10,7 +10,7 @@ import { useSocket } from "../utils/socket";
 import { useAuthUserDetails } from "../utils/UserDetails";
 
 const Chat = () => {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const { user } = useAuthUserDetails();
   const socket = useSocket();
   const { id } = useParams();

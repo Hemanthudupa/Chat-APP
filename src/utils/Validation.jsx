@@ -6,7 +6,7 @@ const Validation = ({ children }) => {
   const nav = useNavigate();
   const { token } = useAuth();
   useEffect(() => {
-    if (!token && !sessionStorage.getItem("token")) {
+    if (!token && !localStorage.getItem("token")) {
       nav("/login");
     }
   }, [token, nav]);

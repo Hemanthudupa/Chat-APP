@@ -7,7 +7,7 @@ export const AuthProviderUserDetails = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
       const decoded = jwtDecode(token); // decode the JWT to get userId, email, etc
       setUser(decoded); // user = { userId, email, name, etc }
