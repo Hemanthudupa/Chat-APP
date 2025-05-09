@@ -1,7 +1,9 @@
 .music {
   height: 100%;
   width: 100%;
-  background-color: rgb(44, 44, 44);
+  /* background-color: rgb(44, 44, 44); */
+  background-color: #000 !important; /* black */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,7 +55,9 @@
   border: none;
   outline: none;
   font-size: 1.2rem;
-  background-color: rgb(44, 44, 44);
+  /* background-color: rgb(44, 44, 44); */
+  background-color: #000 !important; /* black */
+
   color: white;
 }
 .library {
@@ -64,7 +68,10 @@
   justify-content: start;
   background-color: grey;
   border-radius: 10px 10px;
-  color: yellowgreen;
+  /* color: yellowgreen; */
+   background-color: #1db954 !important;
+
+
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 600;
 }
@@ -90,7 +97,10 @@
   display: flex;
   align-items: center;
   justify-content: start;
-  color: yellowgreen;
+  /* color: yellowgreen; */
+ color: #1db954 !important;
+
+
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -119,7 +129,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(44, 44, 44);
+  /* background-color: rgb(44, 44, 44); */
+  background-color: #000 !important; /* black */
   border-left: 1px solid white;
 }
 
@@ -169,7 +180,10 @@
   font-weight: 500;
   margin: 0px;
   padding: 0px;
-  color: rgba(255, 255, 255, 0.756);
+  /* color: rgba(255, 255, 255, 0.756); */
+  /* color: green; */
+  color: #1db954 !important;
+
   display: flex;
   align-items: start;
   justify-content: center;
@@ -189,12 +203,15 @@
 .second-music {
   height: 100%;
   width: 100%;
-  background-color: rgb(44, 44, 44);
+  /* background-color: rgb(44, 44, 44); */
+  background-color: #000 !important; /* black */
+
   overflow-y: scroll;
+  scrollbar-color: #1db954 black !important; /* green */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 }
 .second-text {
   height: 10%;
@@ -208,13 +225,59 @@
   font-size: large;
 }
 
-.my-audio-player {
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+/* Main player container */
+.custom-audio-player {
+  background-color: #000 !important;
+  color: #fff;
+  /* border-radius: 12px; */
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-.my-audio-player .rhap_progress-bar-show-download {
-  background: #4caf50;
-  
+/* Progress bar track */
+.custom-audio-player .rhap_progress-bar {
+  background-color: #000 !important; /* black */
+}
+
+/* Filled part of progress bar */
+.custom-audio-player .rhap_progress-filled {
+  background-color: #1db954 !important; /* Spotify green or any accent */
+}
+
+/* Hide the progress dot if you want */
+.custom-audio-player .rhap_progress-indicator {
+  display: none !important;
+}
+
+/* Time (current & total) */
+.custom-audio-player .rhap_time {
+  color: #aaa !important;
+  font-size: 12px;
+}
+
+/* Buttons (Play, Pause, Volume, etc.) */
+.custom-audio-player .rhap_controls-section svg,
+.custom-audio-player .rhap_volume-container svg {
+  color: #1db954 !important;
+}
+
+/* Volume bar background */
+.custom-audio-player .rhap_volume-bar {
+  background-color: #222 !important;
+}
+
+/* Volume fill */
+.custom-audio-player .rhap_volume-filled {
+  background-color: #1db954 !important;
+}
+
+/* Volume dot */
+.custom-audio-player .rhap_volume-indicator {
+  background-color: #1db954 !important;
+}
+
+/* Optional: Hover scale effect for buttons */
+.custom-audio-player .rhap_main-controls button:hover {
+  transform: scale(1.15);
+  transition: 0.2s ease;
 }

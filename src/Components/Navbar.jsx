@@ -59,12 +59,12 @@ const Navbar = () => {
           <hr style={{ width: "60%" }} />
           <CiGlobe />
 
-          <Link to={"/"} className="link-tag-music">
+          <Link to={"/"} className="link-tag-music link-tag">
             <BsFillChatTextFill />
           </Link>
 
           <IoVideocamOutline />
-          <Link to={"/music"} className="link-tag-music">
+          <Link to={"/music"} className="link-tag-music link-tag">
             <CiMusicNote1 />
           </Link>
           <SlCalender />
@@ -101,7 +101,7 @@ const Navbar = () => {
               {contacts.map((contact) => (
                 <Link
                   to={`/chat/${contact.id}`}
-                  className="link-tag-contact"
+                  className="link-tag-contact link-tag"
                   key={contact.id}
                 >
                   <Contact key={contact.id} data={contact} />
@@ -118,7 +118,8 @@ const Navbar = () => {
               <h1
                 style={{
                   fontSize: "2rem",
-                  color: "greenyellow",
+                  color: " #1db954",
+
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-evenly",

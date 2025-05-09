@@ -17,10 +17,8 @@ const Track = ({ track, number, songUrl: setSongURL, playerReference }) => {
 
   useEffect(() => {
     if (isPlaying) {
-      console.log("Playing: ", trimmedName);
       playerReference?.current?.audio?.current?.play();
     } else {
-      console.log("Paused: ", trimmedName);
       playerReference?.current?.audio?.current?.pause();
     }
   }, [isPlaying, playerReference]);

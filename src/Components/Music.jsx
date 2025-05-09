@@ -40,7 +40,7 @@ const Music = () => {
         return topTracks;
       })
       .then((topTracks) => {
-        setMusics((prev) => [...prev, ...topTracks]);
+        setMusics([...topTracks]);
       });
   }, []);
   return (
@@ -66,6 +66,7 @@ const Music = () => {
       <div className="second-music">
         <div className="second-text">Top Tracks</div>
         {musics.map((music, index, arr) => {
+          console.log(arr.length);
           return (
             <Track
               key={index}
@@ -86,7 +87,7 @@ const Music = () => {
           <AudioPlayer
             src={songUrl}
             autoPlay
-            className="my-audio-player"
+            className="custom-audio-player"
             ref={playerRef}
           />
         ))}
