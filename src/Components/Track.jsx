@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import "./Track.css";
 import "react-h5-audio-player/lib/styles.css";
@@ -15,14 +15,15 @@ const Track = ({ track, number, songUrl: setSongURL, playerReference }) => {
   } = track;
   const trimmedName = name.split(".")[1].trim().split("_")[1];
 
-  if (isPlaying) {
-    console.log(" came now ", playerReference);
-    playerReference?.current?.audio?.current?.play();
-  } else {
-    console.log(" came now ", playerReference);
-
-    playerReference?.current?.audio?.current?.pause();
-  }
+  useEffect(() => {
+    if (isPlaying) {
+      console.log("Playing: ", trimmedName);
+      playerReference?.current?.audio?.current?.play();
+    } else {
+      console.log("Paused: ", trimmedName);
+      playerReference?.current?.audio?.current?.pause();
+    }
+  }, [isPlaying, playerReference]);
 
   return (
     <div
